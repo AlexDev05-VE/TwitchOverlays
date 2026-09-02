@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Barra de progreso estilo Pokémon con Snorlax, animaciones CSS modulares y paleta de colores extraída del Pokémon.">
+    <title>Barra de Progreso — Snorlax</title>
+    <link rel="stylesheet" href="./src/css/style.css">
+</head>
+
+<body>
+
+    <div class="progress-widget">
+        <!-- Fila principal: avatar + barra -->
+        <div class="progress-main">
+
+            <!-- Círculo con Snorlax -->
+            <div class="progress-avatar" id="progress-avatar">
+                <img class="avatar-image" src="./Snorlax.png" alt="Snorlax" draggable="false">
+            </div>
+
+            <!-- Pista de la barra -->
+            <div class="progress-track" id="progress-track">
+                <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
+            </div>
+
+        </div>
+
+        <!-- Etiqueta numérica -->
+        <div class="progress-text" id="progress-text">0 / 100</div>
+    </div>
+
+    <script src="./src/js/main.js"></script>
+</body>
+
+</html>

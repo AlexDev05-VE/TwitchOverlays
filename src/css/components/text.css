@@ -1,0 +1,24 @@
+/* ============================================
+   COMPONENT: Progress Text / Label
+   ============================================ */
+
+.progress-text {
+    margin-right: 24px;
+    font-family: var(--font-main);
+    font-size: var(--font-size-text);
+    font-weight: 700;
+    color: var(--snorlax-purple-dark);
+    letter-spacing: 0.03em;
+
+    /* Estilo tipo etiqueta Pokémon dreamy */
+    background: linear-gradient(135deg,
+            var(--snorlax-cloud) 0%,
+            var(--snorlax-blue-light) 100%);
+    border: 2px solid var(--snorlax-purple);
+    border-radius: 20px;
+    padding: 2px 14px;
+    box-shadow:
+        0 2px 8px rgba(106, 63, 160, 0.3),
+        inset 0 1px 3px rgba(255, 255, 255, 0.55);
+
+}

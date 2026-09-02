@@ -1,0 +1,26 @@
+/* ============================================
+   ANIMATION: Bubble particles in the fill
+   ============================================ */
+
+@keyframes bubbleRise {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.6;
+    }
+    80% {
+        opacity: 0.4;
+    }
+    100% {
+        transform: translateY(-55px) scale(0.7);
+        opacity: 0;
+    }
+}
+
+/* Bubbles rendered via JS, but keyframe lives here */
+.bubble-particle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(245, 237, 214, 0.55);
+    pointer-events: none;
+    animation: bubbleRise linear infinite;
+}

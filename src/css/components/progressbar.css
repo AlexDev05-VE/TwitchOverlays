@@ -1,0 +1,80 @@
+/* ============================================
+   COMPONENT: Progress Bar (pista + relleno)
+   ============================================ */
+
+/* Pista de la barra (fondo) */
+.progress-track {
+    flex-grow: 1;
+    height: var(--track-height);
+    background: linear-gradient(
+        to bottom,
+        var(--snorlax-purple) 0%,
+        var(--snorlax-purple-dark) 60%,
+        #3d1e78 100%
+    );
+    border: var(--border-width) solid var(--snorlax-purple);
+    border-left: none;
+    border-radius: 0 var(--border-radius-track) var(--border-radius-track) 0;
+    margin-left: var(--avatar-overlap);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+
+    /* Outer ring decorativo */
+    outline: 3px solid var(--snorlax-purple-dark);
+    outline-offset: 0px;
+}
+
+/* Línea de brillo superior de la pista */
+.progress-track::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    height: 2px;
+    background: rgba(245, 237, 214, 0.12);
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Relleno de la barra — gradiente dreamy lavanda → cyan */
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        var(--snorlax-cloud) 0%,
+        var(--snorlax-purple-light) 25%,
+        var(--snorlax-blue-light) 60%,
+        var(--snorlax-blue) 100%
+    );
+    border-radius: 0 22px 22px 0;
+
+    /* Brillo superior */
+    box-shadow:
+        inset 0 3px 6px rgba(255, 255, 255, 0.5),
+        inset 0 -2px 4px rgba(106, 63, 160, 0.25),
+        0 0 18px rgba(77, 189, 232, 0.55);
+
+    transition: var(--transition-fill);
+    position: relative;
+    overflow: hidden;
+
+    /* Animación de entrada */
+    animation: fillProgress 1.4s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+/* Resaltado superior dentro del relleno */
+.progress-fill::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 6px;
+    right: 6px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 1;
+}

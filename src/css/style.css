@@ -1,0 +1,24 @@
+/* ============================================
+   STYLE.CSS - Entry point / Importador de módulos
+   Barra de Progreso - Pokémon (Snorlax)
+   ============================================ */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap');
+
+/* ── Base ── */
+@import './base/variables.css';
+@import './base/reset.css';
+
+/* ── Animations ── */
+@import './animation/fill.css';
+@import './animation/shimmer.css';
+@import './animation/avatar.css';
+@import './animation/glow.css';
+@import './animation/bubbles.css';
+
+/* ── Components ── */
+@import './components/widget.css';
+@import './components/avatar.css';
+@import './components/progressbar.css';
+@import './components/text.css';

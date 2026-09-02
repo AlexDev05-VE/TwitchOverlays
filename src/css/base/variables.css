@@ -1,0 +1,47 @@
+/* ============================================
+   VARIABLES - Paleta de colores Snorlax Dreamy
+   ============================================ */
+
+:root {
+    /* --- Colores primarios Snorlax (imagen dreamy) --- */
+    --snorlax-blue: #4DBDE8;          /* Azul cyan brillante del cuerpo */
+    --snorlax-blue-dark: #2E9BBF;     /* Azul cyan oscuro / sombras */
+    --snorlax-blue-light: #80D4F0;    /* Azul cyan claro / reflejos */
+    --snorlax-cream: #FAF0DC;         /* Crema/beige de la panza */
+    --snorlax-cream-dark: #EFE0C0;    /* Crema oscuro / sombras */
+    --snorlax-purple: #9B6DC8;        /* Morado del cielo / borde */
+    --snorlax-purple-dark: #6A3FA0;   /* Morado oscuro */
+    --snorlax-purple-light: #C9A8E8;  /* Lavanda claro */
+    --snorlax-pink: #F080B0;          /* Rosa del cristal */
+    --snorlax-cloud: #F0EEFF;         /* Blanco nubes / lavanda muy claro */
+
+    /* --- Colores del widget --- */
+    --border-color: var(--snorlax-purple);
+    --border-color-outer: var(--snorlax-purple-dark);
+    --track-bg: var(--snorlax-purple-dark);
+    --track-bg-inner: var(--snorlax-purple);
+    --fill-color-1: var(--snorlax-cloud);        /* Inicio del gradiente */
+    --fill-color-2: var(--snorlax-blue-light);   /* Mitad del gradiente */
+    --fill-color-3: var(--snorlax-blue);          /* Fin del gradiente */
+    --avatar-bg: var(--snorlax-purple-dark);
+    --text-color: var(--snorlax-cloud);
+    --text-shadow-color: var(--snorlax-purple-dark);
+    --glow-color: rgba(77, 189, 232, 0.7);        /* Brillo cyan Snorlax */
+    --shine-color: rgba(240, 238, 255, 0.6);      /* Brillo lavanda */
+
+    /* --- Layout --- */
+    --widget-width: 600px;
+    --track-height: 55px;
+    --avatar-size: 110px;
+    --avatar-overlap: -18px;
+    --border-width: 6px;
+    --border-radius-track: 28px;
+
+    /* --- Tipografía --- */
+    --font-main: 'Outfit', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-size-text: 1.6rem;
+
+    /* --- Transiciones --- */
+    --transition-fill: width 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    --transition-hover: all 0.3s ease;
+}

@@ -1,0 +1,57 @@
+/* ============================================
+   COMPONENT: Avatar (círculo con Snorlax)
+   ============================================ */
+
+/* Agrupa el círculo y la barra */
+.progress-main {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+/* Círculo del avatar — Snorlax como imagen de fondo */
+.progress-avatar {
+    width: var(--avatar-size);
+    height: var(--avatar-size);
+
+    /* Imagen de Snorlax como fondo, bien encuadrada */
+    background-image: url('../../../Snorlax.png');
+    background-size: 148%;           /* Recortamos un poco los bordes para centrar el Snorlax */
+    background-position: 52% 62%;   /* Centrado ligeramente hacia abajo y derecha para ver el cuerpo */
+    background-repeat: no-repeat;
+
+    /* Fallback: gradiente morado dreamy por si la imagen no carga */
+    background-color: #7B4FBB;
+
+    border: var(--border-width) solid var(--snorlax-purple);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+
+    /* Sombra estilo dreamy purple */
+    box-shadow:
+        0 0 0 3px var(--snorlax-purple-dark),
+        inset 0 -4px 12px rgba(106, 63, 160, 0.35),
+        inset 0 4px 8px rgba(240, 238, 255, 0.2);
+}
+
+/* Inner ring decorativo lavanda */
+.progress-avatar::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    border: 2px dashed rgba(240, 238, 255, 0.35);
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* Ocultamos el <img> original — la imagen ahora vive en background-image */
+.progress-avatar .avatar-image {
+    display: none;
+}

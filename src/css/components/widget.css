@@ -1,0 +1,11 @@
+/* ============================================
+   COMPONENT: Progress Widget (contenedor principal)
+   ============================================ */
+
+.progress-widget {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: var(--widget-width);
+    position: relative;
+}

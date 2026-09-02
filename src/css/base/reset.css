@@ -1,0 +1,22 @@
+/* ============================================
+   RESET & BASE STYLES
+   ============================================ */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--snorlax-cream-dark);
+    background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(141, 180, 200, 0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 30%, rgba(139, 99, 85, 0.1) 0%, transparent 50%);
+    font-family: var(--font-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
