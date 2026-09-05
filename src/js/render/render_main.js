@@ -1,15 +1,23 @@
 import { Bubbles } from "./bubble.js";
 import { progressController } from "./scoreboard.js";
 
-// --Funcion interfaz que nos ayuda a inicializar las funciones y mantenerla en constante actualizacion--
-function initRender(current, max) {
-    const bubbles = new Bubbles({
-        container: '#progress-fill',
-        count: 20
-    });
+// 1. Instanciar e inicializar las burbujas UNA SOLA VEZ fuera de la función de renderizado
+const bubbles = new Bubbles({
+    container: '#progress-fill',
+    count: 20
+});
 
-    bubbles.init();
+// Arrancar la animación continua de burbujas
+bubbles.init();
+
+/**
+ * Función encargada únicamente de actualizar los valores de la barra.
+ * Ya no reinicia las burbujas al ejecutarse.
+ * @param {number} current - Valor actual
+ * @param {number} max - Valor máximo
+ */
+function updateRender(current, max) {
     progressController.set(current, max);
 }
 
-export { initRender };
+export { updateRender, bubbles };

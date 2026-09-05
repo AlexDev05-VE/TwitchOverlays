@@ -40,7 +40,7 @@ class StoreLocal {
      */
     set currentValue(value) {
         if (value <= 0) return;
-        this.store.currentValue += value;
+        this.store.currentValue = value;
     }
 
     /**
@@ -50,7 +50,7 @@ class StoreLocal {
      */
     set maxValue(value) {
         if (value <= 0) return;
-        this.store.maxValue += value;
+        this.store.maxValue = value;
     }
 
     // ── Getters ──────────────────────────────────────────────────
