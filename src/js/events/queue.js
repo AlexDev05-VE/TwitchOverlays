@@ -1,9 +1,5 @@
-//Servicio de renderizado de la barra de progreso - ServiceRender
-import { updateRender } from "../render/render_main.js";
-//Servicio de Almacenamiento Local - ServiceStoreLocal
-import { StoreLocal } from "../config/storelocal.js";
-//Servicio de Almacenamiento de StreamElements - ServiceStreamElements
-import { StreamElementAPI } from "../config/streamElements.js";
+//Importacion de alertSerive
+import { AlertScoreBoard } from "../services/alertservices.js";
 
 // ─── Queue (Singleton) ───────────────────────────────────────────
 // Almacena y procesa eventos de StreamElements de forma secuencial.
@@ -77,23 +73,7 @@ class Queue {
      */
     #processEvent(event) {
         // Obtener los datos de StreamElements API o LocalStore
-        let current = StoreLocal.currentValue;
-        let max = StoreLocal.maxValue;
-
-        // Si los datos existen entonces proceder a renderizar la barra de progreso
-        if (!max) {
-            console.log('Datos no encontrados en StreamElements API o LocalStore');
-            return;
-        }
-
-        //Realizar sumatoria para obtener el progreso final
-        current += event.amount;
-
-        //Guardar esos datos en la API
-        StoreLocal.currentValue = current;
-
-        // Renderizar la barra de progreso
-        updateRender(current, max);
+        AlertScoreBoard.ExecuteAlert(event);
     }
 }
 
