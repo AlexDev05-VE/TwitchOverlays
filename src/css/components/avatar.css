@@ -15,9 +15,11 @@
     height: var(--avatar-size);
 
     /* Imagen de Snorlax como fondo, bien encuadrada */
-    background-image: url('../../../Snorlax.png');
-    background-size: 148%;           /* Recortamos un poco los bordes para centrar el Snorlax */
-    background-position: 52% 62%;   /* Centrado ligeramente hacia abajo y derecha para ver el cuerpo */
+    background-image: url('https://cdn.streamelements.com/uploads/01m20s1yxj52jnmf5vyyk0atfr.webp');
+    background-size: 148%;
+    /* Recortamos un poco los bordes para centrar el Snorlax */
+    background-position: 52% 62%;
+    /* Centrado ligeramente hacia abajo y derecha para ver el cuerpo */
     background-repeat: no-repeat;
 
     /* Fallback: gradiente morado dreamy por si la imagen no carga */

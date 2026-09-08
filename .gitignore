@@ -1,0 +1,8 @@
+agents.md
+package.json
+.gitignore
+dist/
+vite.config.js
+node_modules/
+package-lock.json
+.agents
