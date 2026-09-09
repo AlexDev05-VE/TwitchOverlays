@@ -1,6 +1,6 @@
-import { StreamElementAPI } from "../config/streamElements.js";
-import { StoreLocal } from "../config/storelocal.js";
-import { updateRender } from "../render/render_main.js";
+import { StreamElementAPI } from "../db/streamElements.js";
+import { StoreLocal } from "../db/storelocal.js";
+import { updateRender } from "../presentation/render_main.js";
 
 /**
  * Servicio encargado exclusivamente de validar, sincronizar 

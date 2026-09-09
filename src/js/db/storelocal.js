@@ -39,17 +39,17 @@ class StoreLocal {
      * @param {number} value
      */
     set currentValue(value) {
-        if (value <= 0) return;
+        if (value < 0) return;
         this.store.currentValue = value;
     }
 
     /**
-     * Suma el valor recibido al maxValue actual.
-     * Solo acepta valores positivos; los negativos son ignorados.
+     * Establece el maxValue actual.
+     * Solo acepta valores positivos o cero; los negativos son ignorados.
      * @param {number} value
      */
     set maxValue(value) {
-        if (value <= 0) return;
+        if (value < 0) return;
         this.store.maxValue = value;
     }
 

@@ -1,5 +1,5 @@
 //Importacion de alertSerive
-import { AlertScoreBoard } from "../services/alertservices.js";
+import { AlertScoreBoard } from "./alertservices.js";
 
 // ─── Queue (Singleton) ───────────────────────────────────────────
 // Almacena y procesa eventos de StreamElements de forma secuencial.
