@@ -14,8 +14,8 @@ export class OverlaySyncService {
      * @returns {boolean}
      */
     static validateConfiguration(fieldData) {
-        if (!fieldData || !fieldData.maxValue) {
-            console.error('[OverlaySync] Error de configuración: fieldData.maxValue es requerido.');
+        if (!fieldData || !fieldData.maxValue || !fieldData.animationType) {
+            console.error('[OverlaySync] Error de configuración: fieldData.maxValue y fieldData.animationType es requerido.');
             return false;
         }
         return true;
@@ -28,9 +28,14 @@ export class OverlaySyncService {
     static async syncAndRender(fieldData) {
         if (!this.validateConfiguration(fieldData)) return;
 
+        // Obtener los datos de StreamElements API para el manejo de current y max
         const currentMaxInput = fieldData.maxValue;
         const setapi_current = await StreamElementAPI.get('shyvadi_snorlax_overlay_current');
         const setapi_max = await StreamElementAPI.get('shyvadi_snorlax_overlay_max');
+
+        // Obtener los datos de animationType
+        const animationTypeInput = fieldData.animationType;
+        StoreLocal.animationType = animationTypeInput;
 
         // Escenario 1: Inicialización previa sin datos
         if (!setapi_current && !setapi_max) {

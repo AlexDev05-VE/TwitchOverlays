@@ -5,8 +5,7 @@ import { updateRender } from "../presentation/render_main.js";
 /**
  * ─── AlertServices (Clase Abstracta / AlertABC) ────────────────────
  * Define el contrato base para todos los servicios de alertas de Twitch.
- * Maneja la lógica de interacción con StreamElements API y StoreLocal.
- * 
+ * Maneja la estructura pura de llamadas estáticas sin instanciación.
  */
 export class AlertServices {
 
@@ -14,70 +13,132 @@ export class AlertServices {
         if (new.target === AlertServices) {
             throw new Error(
                 '[AlertServices] No se puede instanciar una clase abstracta. ' +
-                'Usa una clase concreta como AlertScoreBoard.'
+                'Invoca directamente los métodos estáticos de la clase concreta.'
             );
         }
     }
 
     /**
-     * Método abstracto que las clases concretas deben implementar.
+     * Método estático abstracto que las clases concretas deben implementar.
      * Contiene la lógica principal de ejecución de la alerta.
      * 
      * @abstract
      * @param {Object} event - El evento de StreamElements a procesar.
-     * @returns {Promise<void>}
+     * @returns {Promise<number>}
      */
-    execute(event) {
+    static async execute(event) {
         throw new Error(
-            '[AlertServices] El método execute(event) debe ser implementado por la clase concreta.'
+            '[AlertServices] El método estático execute(event) debe ser implementado por la clase concreta.'
         );
     }
 }
 
 /**
  * ─── AlertScoreBoard (Clase Concreta) ───────────────────────────────
- * Maneja toda la lógica de alertas de tipo Scoreboard.
+ * Maneja toda la lógica de alertas de tipo Scoreboard de manera estática.
+ * Expone exclusivamente la interfaz `execute` y encapsula la lógica interna en métodos privados.
  */
 export class AlertScoreBoard extends AlertServices {
 
     /**
-     * Aumenta o cambia el contador de StreamElementsAPI y StoreLocal
-     * dependiendo de la cantidad de donaciones que viene en el evento.
+     * Método privado estático para actualizar el contador en StreamElementsAPI,
+     * sincronizar la memoria local en StoreLocal y re-renderizar la UI.
      * 
-     * @param {Object} event - Evento recibido desde Twitch / StreamElements.
+     * @private
+     * @param {number} amountToAdd - Cantidad incremental a sumar al total actual.
      * @returns {Promise<number>} Nuevo valor total acumulado.
      */
-    static async increseScoreBoard(event) {
-        const donationAmount = Number(event?.amount || event?.count || 1);
-
-        // 1. Obtener el valor actual de StreamElementAPI ('shyvadi_snorlax_overlay_current')
+    static async #updateScoreboard(amountToAdd) {
         const apiData = await StreamElementAPI.get('shyvadi_snorlax_overlay_current');
         const currentValue = apiData?.value ? Number(apiData.value) : (StoreLocal.currentValue || 0);
 
-        // 2. Realizar la sumatoria con el valor recibido
-        const updatedValue = currentValue + donationAmount;
+        const updatedValue = currentValue + amountToAdd;
 
-        // 3. Modificar y guardar en StreamElementAPI
         await StreamElementAPI.set('shyvadi_snorlax_overlay_current', { value: updatedValue });
-
-        // 4. Actualizar datos en cache de StoreLocal por resiliencia
         StoreLocal.currentValue = updatedValue;
 
-        // 5. Renderizar los cambios en la UI
         updateRender(StoreLocal.currentValue, StoreLocal.maxValue);
 
         return updatedValue;
     }
 
     /**
-     * Función principal que ejecuta la lógica completa de la alerta respetando SOLID.
+     * Método privado estático para procesar eventos de suscriptores.
      * 
-     * @param {Object} event - Evento de la alerta.
-     * @returns {Promise<void>}
+     * @private
+     * @param {Object} event - Evento recibido.
+     * @returns {Promise<number>} Nuevo valor acumulado.
      */
-    static async ExecuteAlert(event) {
-        await this.increseScoreBoard(event);
+    static async #subscribersEvent(event) {
+        const amount = Number(event?.amount || event?.count || 1);
+        return await this.#updateScoreboard(amount);
     }
 
-}
+    /**
+     * Método privado estático para procesar eventos de seguidores (+1 constante).
+     * 
+     * @private
+     * @returns {Promise<number>} Nuevo valor acumulado.
+     */
+    static async #followerEvent() {
+        return await this.#updateScoreboard(1);
+    }
 
+    /**
+     * Método privado estático para procesar eventos de donaciones (Tips/Bits).
+     * 
+     * @private
+     * @param {Object} event - Evento recibido desde Twitch / StreamElements.
+     * @returns {Promise<number>} Nuevo valor acumulado.
+     */
+    static async #tipsEvent(event) {
+        const donationAmount = Number(event?.amount || event?.count || 1);
+        return await this.#updateScoreboard(donationAmount);
+    }
+
+    /**
+     * Evaluador privado de tipos de eventos de animación/metas.
+     * Redirige la ejecución según el tipo de alerta recibido.
+     * 
+     * @private
+     * @param {Object} event - Evento recibido desde la cola.
+     * @returns {Promise<number>}
+     */
+    static async #increaseScoreBoard(event) {
+        const animationType = event?.type;
+
+        switch (animationType) {
+            case 'subscriber':
+                return await this.#subscribersEvent(event);
+            case 'follower':
+                return await this.#followerEvent();
+            case 'tip':
+                return await this.#tipsEvent(event);
+            default:
+                console.warn(`[AlertScoreBoard] Tipo de evento no reconocido: '${animationType}'`);
+                return 0;
+        }
+    }
+
+    /**
+     * Método Público Principal.
+     * Punto de entrada de ejecución estático exigido por el contrato de la interfaz.
+     * 
+     * @override
+     * @param {Object} event - Evento de la alerta a procesar.
+     * @returns {Promise<number>}
+     */
+    static async execute(event) {
+        return await this.#increaseScoreBoard(event);
+    }
+
+    /**
+     * Alias público estático para mantener compatibilidad con invocaciones como ExecuteAlert.
+     * 
+     * @param {Object} event - Evento de la alerta.
+     * @returns {Promise<number>}
+     */
+    static async ExecuteAlert(event) {
+        return await this.execute(event);
+    }
+}

@@ -22,11 +22,11 @@ export class Comands {
      * Evalúa si las insignias del usuario contienen permisos administrativos.
      * @protected
      * @param {Array<Object>} [badges=[]] - Arreglo de insignias proveniente del evento de chat.
-     * @returns {boolean} True si es el streamer (broadcaster) o un moderador.
+     * @returns {boolean} True si es el streamer (broadcaster) 
      */
     static hasAdminPermission(badges = []) {
         if (!Array.isArray(badges)) return false;
-        return badges.some(badge => badge.type === 'broadcaster' || badge.type === 'moderator');
+        return badges.some(badge => badge.type === 'broadcaster');
     }
 }
 

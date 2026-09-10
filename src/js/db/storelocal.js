@@ -27,7 +27,8 @@ class StoreLocal {
          */
         this.store = {
             currentValue: 0,
-            maxValue: 0
+            maxValue: 0,
+            animationType: "",
         };
     }
 
@@ -53,6 +54,14 @@ class StoreLocal {
         this.store.maxValue = value;
     }
 
+    /**
+     * Establece el tipo de animación actual.
+     * @param {string} value
+     */
+    set animationType(value) {
+        this.store.animationType = value;
+    }
+
     // ── Getters ──────────────────────────────────────────────────
 
     /**
@@ -69,6 +78,14 @@ class StoreLocal {
      */
     get maxValue() {
         return this.store.maxValue;
+    }
+
+    /**
+     * Devuelve el tipo de animación actual.
+     * @returns {string}
+     */
+    get animationType() {
+        return this.store.animationType;
     }
 }
 
